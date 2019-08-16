@@ -1,0 +1,28 @@
+Anthony Rizzo                 4.1920.3881.1920.4520.3  1.2160.748     Rhys Hoskins                  4.1320.2441.1360.2880.1560.8480.848
+Nicholas Castellanos          3.88 0.3680.86 0.4080.3281.2321.052     Bryce Harper                  4.0080.3721.16 0.3960.2520.9041.032
+Kris Bryant                   3.9640.3680.9080.5240.2961.2441.032     J.T. Realmuto                 3.94 0.4321.1640.4840.2040.7561.04 
+Kyle Schwarber                3.7240.3840.9280.4  0.4361.1320.76      Corey Dickerson               3.9680.4041.0760.48 0.1880.8121.048
+Ian Happ                      3.7160.3240.9480.3920.3041.1080.98      Jean Segura                   3.8120.3441.1280.44 0.1720.7960.9  
+David Bote                    3.6  0.3560.94 0.44 0.3721.0161.016     Cesar Hernandez               3.7280.2921.0880.3640.1720.78 0.888
+Victor Caratini               3.5280.3080.8640.3480.3280.9721.012     Scott Kingery                 3.5920.2841.0  0.4040.2040.7640.968
+Yu Darvish                    2.2440.2680.6  0.26 0.2  0.6720.672     Adam Haseley                  3.5040.3440.9360.4  0.16 0.7720.96 
+Albert Almora Jr.             3.3760.3880.8120.48 0.2681.0080.88      Drew Smyly                    1.5760.14 0.4560.1880.06 0.3  0.36 
+Generic                       1.2240.1240.2440.1440.1080.3520.324     Generic                       1.8320.1560.48 0.1560.1320.4120.42 
+The simulations took 2152.974037885666 seconds for the 250 simulations
+The Cubs beat the Phillies 52.8% of the games by an average score of 6.118108583413151 to 5.711927100696925
+The Cubs have a 52.64961473575429% chance of winning, a 42.89746039142226% chance of covering -1.5, and a 62.24474908827338% chance of covering +1.5
+
+Francisco Lindor              4.14 0.3361.1160.4440.2921.1960.728     DJ LeMahieu                   4.2760.3641.0280.3880.18 1.1040.752
+Greg Allen                    3.82 0.3  1.0240.26 0.32 1.1880.904     Aaron Judge                   4.2160.3120.8960.3160.1480.8920.944
+Carlos Santana                3.86 0.2440.9080.3560.2321.0321.128     Didi Gregorius                4.0440.46 0.9840.5  0.1481.0120.824
+Yasiel Puig                   3.7560.3760.88 0.32 0.2641.0480.988     Gio Urshela                   3.8920.3520.9560.3960.1840.8880.772
+Jose Ramirez                  3.7840.2880.8920.3920.1841.0760.94      Gary Sanchez                  3.78 0.2640.8680.2640.22 0.8880.824
+Jason Kipnis                  3.6360.3080.9640.3560.2241.0520.812     Brett Gardner                 3.7160.36 0.9120.3840.2040.82 0.848
+Franmil Reyes                 3.5280.3160.9160.32 0.2161.0440.916     Gleyber Torres                3.6640.3840.9440.4  0.1880.8640.788
+Tyler Naquin                  3.3440.3040.8640.3  0.2640.9480.876     Mike Tauchman                 3.5560.2840.8760.36 0.1520.8320.748
+Roberto Perez                 3.3440.3160.8280.2880.18 0.8920.936     Mike Ford                     3.46 0.3520.8280.3720.1520.9040.816
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 2098.021718978882 seconds for the 250 simulations
+The Yankees beat the Indians 56.4% of the games by an average score of 5.413637574327196 to 4.886870963929591
+The Yankees have a 54.09436053904832% chance of winning, a 42.467414975777196% chance of covering -1.5, and a 65.37897798368533% chance of covering +1.5
+

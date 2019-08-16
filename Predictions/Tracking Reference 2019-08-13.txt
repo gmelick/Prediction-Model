@@ -1,0 +1,210 @@
+Mallex Smith                  4.2550.3051.1350.3550.24 1.15 0.875     Niko Goodrum                  4.07 0.4151.2350.46 0.52 0.8550.99 
+J.P. Crawford                 4.1250.4651.06 0.41 0.2451.2651.09      Dawel Lugo                    4.0050.3951.0250.5750.32 0.9251.235
+Domingo Santana               4.07 0.45 1.1150.4950.19 1.13 1.08      Miguel Cabrera                3.8  0.4151.04 0.55 0.3450.89 0.975
+Daniel Vogelbach              3.9050.3751.0350.45 0.19 1.05 1.145     Brandon Dixon                 3.76 0.3551.01 0.4250.37 0.8751.06 
+Austin Nola                   3.9050.4051.0  0.4250.1851.18 1.025     Ronny Rodriguez               3.7450.3851.01 0.34 0.28 0.85 1.085
+Kyle Seager                   3.78 0.41 0.9650.4450.25 1.0  0.895     John Hicks                    3.67 0.4051.08 0.49 0.3050.84 1.075
+Tom Murphy                    3.6550.39 0.9150.43 0.22 0.9450.86      Travis Demeritte              3.66 0.41 1.0  0.41 0.33 0.88 1.065
+Dee Gordon                    3.4650.35 0.91 0.4  0.25 0.8550.855     Jake Rogers                   3.5  0.3750.94 0.42 0.3050.83 0.93 
+Tim Lopes                     3.3950.27 0.83 0.3150.2450.9650.965     Jordy Mercer                  3.3150.4  0.99 0.54 0.3250.8350.81 
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 724.8606934547424 seconds for the 200 simulations
+The Tigers beat the Mariners 53.0% of the games by an average score of 6.687714647065983 to 5.941990831141663
+The Tigers have a 54.777629461727685% chance of winning, a 45.16784529263901% chance of covering -1.5, and a 64.11416634134359% chance of covering +1.5
+
+Mookie Betts                  3.8650.3550.64 0.4050.4051.56 0.685     Francisco Lindor              4.1250.22 0.8050.2350.18 1.58 0.68 
+Rafael Devers                 3.73 0.3150.75 0.2750.43 1.46 0.725     Oscar Mercado                 3.95 0.2550.8150.2650.1951.4250.84 
+Xander Bogaerts               3.69 0.25 0.5650.32 0.36 1.43 0.91      Carlos Santana                3.8550.2150.8  0.23 0.21 1.4250.935
+J.D. Martinez                 3.59 0.2550.5050.2250.3651.3950.755     Franmil Reyes                 3.8  0.1850.7750.2250.22 1.61 0.88 
+Andrew Benintendi             3.57 0.24 0.6450.33 0.3751.25 0.75      Jose Ramirez                  3.74 0.1950.7250.1450.1651.4450.825
+Mitch Moreland                3.44 0.24 0.6350.2050.3251.28 0.755     Roberto Perez                 3.5550.2550.75 0.3350.2351.4350.775
+Marco Hernandez               3.36 0.2350.5950.28 0.32 1.37 0.825     Jason Kipnis                  3.55 0.21 0.69 0.23 0.1751.55 0.855
+Sandy Leon                    3.21 0.15 0.51 0.16 0.34 1.36 0.755     Greg Allen                    3.4250.2050.6650.27 0.15 1.3250.68 
+Jackie Bradley Jr.            3.0450.2750.4950.25 0.3851.15 0.77      Tyler Naquin                  3.18 0.22 0.6350.2250.21 1.31 0.64 
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 1599.4252996444702 seconds for the 200 simulations
+The Red Sox beat the Indians 50.5% of the games by an average score of 3.9348831138134375 to 3.5461547416826744
+The Red Sox have a 53.41338413784658% chance of winning, a 40.32688463279126% chance of covering -1.5, and a 66.13777113542255% chance of covering +1.5
+
+Max Kepler                    4.0850.29 0.9450.3150.38 1.2250.745     Lorenzo Cain                  4.28 0.36 1.2350.4350.3250.8451.005
+Mitch Garver                  3.9250.29 0.79 0.3150.34 1.0950.965     Keston Hiura                  4.0450.36 1.08 0.33 0.36 0.9451.165
+Jorge Polanco                 3.8250.2350.7850.2550.3351.08 1.045     Christian Yelich              4.03 0.37 1.0550.3950.3450.83 1.33 
+Eddie Rosario                 3.7650.26 0.7450.28 0.29 1.15 1.0       Ryan Braun                    3.98 0.37 1.1  0.3950.2950.83 1.055
+Miguel Sano                   3.71 0.29 0.8150.3050.2851.0150.855     Yasmani Grandal               3.8850.26 0.9  0.34 0.2450.86 1.28 
+Luis Arraez                   3.5550.2550.78 0.2650.3050.9650.83      Mike Moustakas                3.6050.32 0.83 0.31 0.37 0.8450.955
+C.J. Cron                     3.5950.2750.8150.29 0.2751.0550.97      Manny Pina                    3.6250.3450.91 0.37 0.3150.86 1.08 
+Marwin Gonzalez               3.46 0.27 0.7650.2850.2551.02 0.84      Hernan Perez                  3.5550.37 1.04 0.4250.2650.7650.87 
+Martin Perez                  1.94 0.1350.41 0.18 0.1050.47 0.545     Chase Anderson                1.7750.1550.4850.2150.1950.4250.6  
+Generic                       1.41 0.15 0.36 0.1650.09 0.37 0.295     Generic                       1.61 0.1750.46 0.2050.1150.38 0.45 
+The simulations took 1598.2828812599182 seconds for the 200 simulations
+The Brewers beat the Twins 59.0% of the games by an average score of 5.458063673999284 to 4.26014562926979
+The Brewers have a 59.13436583802205% chance of winning, a 47.67737398498076% chance of covering -1.5, and a 69.85581117556225% chance of covering +1.5
+
+Dexter Fowler                 4.24 0.4351.23 0.4850.2950.9450.96      Whit Merrifield               3.9850.2650.6850.3  0.34 1.3450.92 
+Tommy Edman                   4.0  0.4751.21 0.5350.3350.81 1.02      Alex Gordon                   3.7750.25 0.7950.2650.3  1.33 0.885
+Paul Goldschmidt              3.99 0.3651.0750.47 0.3  0.86 1.275     Hunter Dozier                 3.6250.39 0.8150.37 0.32 1.2350.965
+Marcell Ozuna                 3.9350.51 1.1850.47 0.27 0.83 1.155     Jorge Soler                   3.56 0.39 0.7650.4  0.3151.3150.945
+Paul DeJong                   3.74 0.43 1.1150.5550.28 0.8351.09      Cheslor Cuthbert              3.5  0.3050.73 0.3750.3  1.2  0.805
+Matt Carpenter                3.59 0.36 1.0150.37 0.36 0.85 1.055     Ryan O'Hearn                  3.3950.35 0.8750.4350.28 1.1650.755
+Yadier Molina                 3.53 0.38 0.99 0.3750.26 0.82 1.145     Humberto Arteaga              3.43 0.26 0.62 0.3050.2751.29 1.105
+Kolten Wong                   3.4950.33 0.99 0.44 0.2450.8  1.055     Meibrys Viloria               3.2250.2750.6550.2850.31 1.19 0.66 
+Lane Thomas                   3.3150.49 0.9150.4250.3  0.7951.015     Nicky Lopez                   3.13 0.26 0.7450.33 0.2551.1  0.735
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 1079.4663615226746 seconds for the 200 simulations
+The Cardinals beat the Royals 64.0% of the games by an average score of 6.5845826299700665 to 4.886870963929592
+The Cardinals have a 62.70040155060389% chance of winning, a 51.504613452732116% chance of covering -1.5, and a 72.91133148249833% chance of covering +1.5
+
+Jarrod Dyson                  4.25 0.38 1.03 0.37 0.3451.1450.975     Charlie Blackmon              4.06 0.5551.4550.7850.2650.79 1.0  
+David Peralta                 4.08 0.3551.1350.3950.32 1.0650.855     Trevor Story                  3.84 0.5951.2950.6250.22 0.8751.275
+Ketel Marte                   3.98 0.37 1.08 0.35 0.28 0.9151.155     Nolan Arenado                 3.6850.45 1.1  0.75 0.32 0.9151.335
+Christian Walker              3.8850.4051.0  0.41 0.25 1.0350.995     Daniel Murphy                 3.62 0.45 1.21 0.6450.2450.78 1.325
+Jake Lamb                     3.9550.4451.1650.4750.2450.91 0.925     Raimel Tapia                  3.56 0.4251.12 0.71 0.25 0.77 1.35 
+Josh Rojas                    3.6750.36 0.8850.35 0.28 0.95 0.87      Ryan McMahon                  3.57 0.36 1.02 0.5450.22 0.9051.3  
+Nick Ahmed                    3.68 0.4351.0  0.4150.3  0.92 0.97      Yonathan Daza                 3.5150.43 1.0350.5850.2550.86 1.19 
+Alex Avila                    3.67 0.3050.9950.42 0.24 0.83 0.935     Dom Nunez                     3.42 0.44 1.07 0.6450.26 0.7551.06 
+Zac Gallen                    1.9850.1450.4450.1450.15 0.53 0.565     Jeff Hoffman                  1.1850.22 0.3850.2650.06 0.29 0.425
+Generic                       1.4950.13 0.4450.16 0.0850.32 0.395     Generic                       2.13 0.23 0.6350.3150.1550.5250.635
+The simulations took 585.6635704040527 seconds for the 200 simulations
+The Rockies beat the D-backs 70.0% of the games by an average score of 9.38501355572842 to 5.6087950836010085
+The Rockies have a 70.13482021232032% chance of winning, a 62.49230265314689% chance of covering -1.5, and a 76.97815735746407% chance of covering +1.5
+
+Marcus Semien                 4.2450.2951.0650.3  0.17 1.11 0.83      Donovan Solano                4.1950.3151.0450.3250.2750.9  1.015
+Matt Chapman                  4.0350.34 0.9550.39 0.1851.0550.985     Joey Rickard                  4.03 0.32 1.0650.34 0.26 0.8850.91 
+Matt Olson                    3.9550.38 0.8350.38 0.1650.96 1.08      Buster Posey                  4.01 0.2851.0950.42 0.2350.8151.195
+Mark Canha                    3.9050.2950.8750.3750.2  1.0750.875     Evan Longoria                 3.9250.2351.0450.27 0.1750.93 1.025
+Chad Pinder                   3.6150.3  0.8150.29 0.29 0.9350.78      Kevin Pillar                  3.8  0.2550.96 0.23 0.23 0.7651.115
+Stephen Piscotty              3.68 0.2450.8050.3150.2  1.0  0.86      Austin Slater                 3.64 0.3450.9450.4050.2  0.7450.995
+Robbie Grossman               3.6050.22 0.83 0.2450.1650.96 0.845     Aramis Garcia                 3.5250.28 1.0  0.23 0.2250.7850.955
+Dustin Garneau                3.4250.32 0.78 0.28 0.16 0.9150.925     Brandon Crawford              3.5250.2750.9150.32 0.2250.7751.15 
+Brett Anderson                1.9550.16 0.4250.19 0.1  0.4950.475     Madison Bumgarner             2.3050.1450.63 0.2050.1250.44 0.62 
+Generic                       1.4050.13 0.35 0.13 0.05 0.4650.31      Generic                       1.19 0.09 0.2950.09 0.0750.26 0.335
+The simulations took 1164.3246312141418 seconds for the 200 simulations
+The Athletics beat the Giants 52.5% of the games by an average score of 4.625074305147649 to 4.537808752220335
+The Athletics have a 50.65102729967575% chance of winning, a 39.58144785256781% chance of covering -1.5, and a 61.67037716994251% chance of covering +1.5
+
+Adam Frazier                  4.19 0.3250.8950.3050.1851.26 0.64      David Fletcher                4.0850.26 0.7450.2850.3151.56 0.88 
+Bryan Reynolds                3.9550.3450.9750.3450.18 1.2050.83      Mike Trout                    3.9550.4  1.01 0.3450.2351.2950.865
+Starling Marte                3.87 0.36 0.8750.43 0.16 1.21 0.735     Shohei Ohtani                 3.88 0.35 0.81 0.3650.2951.3  1.155
+Josh Bell                     3.8550.2750.8150.33 0.2151.23 0.895     Justin Upton                  3.7750.31 0.69 0.4150.2751.26 0.925
+Colin Moran                   3.7850.29 0.82 0.2950.2251.27 0.85      Kole Calhoun                  3.66 0.3750.87 0.36 0.24 1.12 0.84 
+Jose Osuna                    3.7  0.4051.0050.45 0.21 1.09 0.625     Albert Pujols                 3.5650.3150.8050.34 0.2351.22 0.91 
+Kevin Newman                  3.4650.36 0.84 0.39 0.21 1.06 0.805     Matt Thaiss                   3.48 0.3050.7350.31 0.23 1.1950.87 
+Jacob Stallings               3.3950.3650.7650.39 0.1651.01 0.835     Luis Rengifo                  3.3450.2550.6850.2550.24 1.07 0.825
+Pablo Reyes                   3.2750.31 0.7150.3250.2  1.0650.775     Max Stassi                    3.3250.2650.74 0.27 0.21 1.0  0.755
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 627.4030148983002 seconds for the 200 simulations
+The Pirates beat the Angels 56.5% of the games by an average score of 5.196267015217342 to 4.6885401618220595
+The Pirates have a 54.25857415731091% chance of winning, a 41.721730599956395% chance of covering -1.5, and a 66.38223757604645% chance of covering +1.5
+
+Guillermo Heredia             4.12 0.26 1.08 0.3  0.1751.0050.78      Fernando Tatis Jr.            4.3  0.42 1.17 0.4050.09 1.47 0.815
+Austin Meadows                3.8450.38 1.03 0.3750.1650.9650.905     Wil Myers                     4.14 0.28 0.8950.3250.1251.28 0.945
+Matt Duffy                    3.74 0.39 0.99 0.4350.24 0.8650.95      Manny Machado                 4.04 0.2750.94 0.2450.1  1.3350.79 
+Avisail Garcia                3.69 0.37 1.0  0.4350.2050.92 0.985     Hunter Renfroe                3.9150.2650.93 0.3050.1551.2750.86 
+Ji-Man Choi                   3.6850.2250.82 0.32 0.1450.9550.98      Eric Hosmer                   3.7650.34 0.9650.35 0.1251.05 0.75 
+Willy Adames                  3.49 0.24 0.93 0.28 0.2  0.81 0.82      Manuel Margot                 3.7250.3  0.89 0.32 0.14 1.0350.9  
+Eric Sogard                   3.47 0.3150.89 0.3  0.18 0.84 1.0       Luis Urias                    3.6  0.3050.8950.32 0.11 1.0650.795
+Mike Zunino                   3.28 0.3550.86 0.3350.1950.8  0.79      Austin Hedges                 3.59 0.2450.8350.2750.11 1.01 0.815
+Brendan McKay                 2.28 0.1650.6050.2350.1050.54 0.54      Eric Lauer                    1.6650.0850.45 0.1050.0150.5050.375
+Generic                       1.05 0.11 0.36 0.1350.04 0.24 0.205     Generic                       1.8150.13 0.4450.1350.0750.53 0.37 
+The simulations took 695.4363646507263 seconds for the 200 simulations
+The Rays beat the Padres 56.0% of the games by an average score of 5.164534086880136 to 4.561608448473239
+The Rays have a 54.637187005187634% chance of winning, a 43.11933548502082% chance of covering -1.5, and a 65.77524445723053% chance of covering +1.5
+
+George Springer               4.3350.3151.07 0.35 0.2850.9751.025     Ryan Goins                    4.12 0.2550.8450.25 0.35 1.3850.775
+Jose Altuve                   4.2350.36 1.1  0.3250.2350.93 1.13      Tim Anderson                  3.98 0.3  0.81 0.3350.3551.3151.055
+Yordan Alvarez                4.1950.3251.1250.33 0.24 0.8951.145     Jose Abreu                    3.88 0.2750.7650.32 0.2851.44 0.94 
+Carlos Correa                 4.0250.2851.06 0.32 0.2550.9051.05      James McCann                  3.91 0.25 0.8  0.2450.2451.31 0.97 
+Yuli Gurriel                  3.9150.3050.97 0.2950.1950.89 1.145     Eloy Jimenez                  3.86 0.2650.8250.31 0.19 1.3650.93 
+Josh Reddick                  3.8450.31 0.8450.3950.2350.8450.98      Matt Skole                    3.77 0.24 0.77 0.29 0.23 1.2550.875
+Aledmys Diaz                  3.7  0.2850.8050.3250.2250.8950.87      Yolmer Sanchez                3.4850.22 0.6650.25 0.32 1.29 0.755
+Martin Maldonado              3.62 0.33 0.8750.25 0.26 0.89 0.885     Adam Engel                    3.42 0.23 0.72 0.24 0.21 1.1350.91 
+Myles Straw                   3.51 0.2550.8450.3050.25 0.85 0.915     Ryan Cordell                  3.31 0.24 0.7050.2450.24 1.05 0.85 
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 1736.6712033748627 seconds for the 200 simulations
+The Astros beat the White Sox 59.0% of the games by an average score of 4.767872482665072 to 4.006282202572149
+The Astros have a 56.19287054745088% chance of winning, a 43.99416920020054% chance of covering -1.5, and a 67.82601285365475% chance of covering +1.5
+
+George Springer               4.22 0.29 0.83 0.3450.4351.3251.015     Jon Jay                       4.1550.46 1.0350.49 0.2151.01 0.67 
+Jose Altuve                   4.18 0.33 1.23 0.41 0.35 1.22 0.975     Tim Anderson                  4.0250.37 0.86 0.4250.1651.0850.79 
+Michael Brantley              3.8050.3050.9150.4  0.43 1.11 1.125     Jose Abreu                    3.9550.45 0.93 0.4850.13 1.04 0.845
+Carlos Correa                 3.7250.2750.87 0.36 0.5  1.11 1.24      Welington Castillo            3.9450.37 0.8650.43 0.1051.0350.71 
+Yordan Alvarez                3.8750.32 0.9950.3750.32 1.0851.24      Eloy Jimenez                  3.85 0.35 0.97 0.3750.11 1.02 0.59 
+Yuli Gurriel                  3.6950.31 0.95 0.36 0.35 1.07 0.965     Ryan Goins                    3.7150.36 0.9550.3850.14 0.83 0.705
+Aledmys Diaz                  3.55 0.3450.9350.44 0.34 0.98 0.995     Yolmer Sanchez                3.61 0.3950.9050.4750.1350.9550.775
+Robinson Chirinos             3.55 0.1950.99 0.36 0.32 0.9451.1       Matt Skole                    3.51 0.3250.8  0.3350.11 0.8950.665
+Jake Marisnick                3.5050.18 0.8150.2650.3  0.92 1.205     Adam Engel                    3.37 0.4150.8750.4650.17 0.93 0.655
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 497.44501519203186 seconds for the 200 simulations
+The White Sox beat the Astros 57.5% of the games by an average score of 6.156188097417798 to 5.346998424819065
+The White Sox have a 55.25235735609915% chance of winning, a 45.5125017480255% chance of covering -1.5, and a 64.6839868367242% chance of covering +1.5
+
+Jonathan Villar               4.0550.4151.06 0.4950.27 1.12 0.915     DJ LeMahieu                   4.09 0.24 1.0550.3050.2551.1  0.825
+Trey Mancini                  3.9850.38 0.96 0.39 0.3051.1251.035     Aaron Judge                   3.94 0.24 0.88 0.32 0.2450.9750.97 
+Anthony Santander             3.88 0.2850.9150.3450.18 1.06 0.975     Gio Urshela                   3.8350.2650.8950.3350.2050.96 1.055
+Renato Nunez                  3.76 0.3350.89 0.41 0.2051.0350.995     Gary Sanchez                  3.72 0.29 0.89 0.2950.2650.9550.96 
+Jace Peterson                 3.63 0.37 0.85 0.3950.2651.0  0.925     Gleyber Torres                3.5550.31 0.8750.2950.27 0.8650.83 
+Hanser Alberto                3.6450.3450.93 0.3750.22 0.98 0.815     Didi Gregorius                3.5  0.2850.8950.41 0.2650.9250.91 
+Chance Sisco                  3.43 0.3850.94 0.4650.23 0.9450.92      Cameron Maybin                3.38 0.2750.7750.2850.22 0.8950.97 
+Stevie Wilkerson              3.3350.34 0.8  0.3  0.24 0.98 1.0       Austin Romine                 3.31 0.28 0.77 0.3050.2650.9150.9  
+Rio Ruiz                      3.2350.3350.8950.4  0.21 0.8950.795     Mike Tauchman                 3.2850.3  0.86 0.37 0.24 0.9050.85 
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 736.3453078269958 seconds for the 200 simulations
+The Orioles beat the Yankees 60.0% of the games by an average score of 5.6801941723597205 to 4.640940769316252
+The Orioles have a 57.115454674105514% chance of winning, a 46.831830180085994% chance of covering -1.5, and a 66.93527181086505% chance of covering +1.5
+
+Jesse Winker                  4.2150.31 1.0950.27 0.24 1.0950.915     Trea Turner                   4.27 0.29 0.94 0.2850.2351.1  0.935
+Joey Votto                    4.0450.2550.9150.28 0.18 1.02 1.115     Victor Robles                 4.0150.38 1.13 0.4450.2851.0050.915
+Eugenio Suarez                3.8550.31 0.9650.35 0.1850.99 0.94      Anthony Rendon                3.94 0.3350.95 0.31 0.2751.0451.18 
+Aristides Aquino              3.78 0.3150.92 0.3750.2  0.88 1.02      Juan Soto                     3.85 0.3550.9850.4050.3451.0751.07 
+Josh VanMeter                 3.84 0.27 0.9350.31 0.14 0.93 0.975     Howie Kendrick                3.7950.31 0.9350.4250.3150.97 1.115
+Nick Senzel                   3.72 0.25 0.8850.3650.1650.8450.89      Brian Dozier                  3.6650.36 0.95 0.34 0.27 0.8651.08 
+Jose Iglesias                 3.52 0.2450.8  0.2950.1351.04 0.865     Gerardo Parra                 3.5250.2550.84 0.3350.2751.0150.995
+Kyle Farmer                   3.5050.2750.9  0.3450.1550.9650.88      Yan Gomes                     3.4950.26 0.8950.3250.25 0.87 0.935
+Alex Wood                     1.9  0.1750.5250.2350.09 0.4650.48      Joe Ross                      1.12 0.06 0.28 0.09 0.08 0.2750.345
+Generic                       1.4350.12 0.4350.13 0.05 0.3150.29      Generic                       2.2950.19 0.54 0.1850.1450.67 0.605
+The simulations took 841.9384100437164 seconds for the 200 simulations
+The Nationals beat the Reds 50.0% of the games by an average score of 5.053468837699919 to 4.783738946833675
+The Nationals have a 51.99945746523036% chance of winning, a 40.95532423200808% chance of covering -1.5, and a 62.891243812870265% chance of covering +1.5
+
+Jason Heyward                 4.0950.3150.9850.3450.27 1.0750.78      Bryce Harper                  4.13 0.3  1.0550.32 0.3151.0650.93 
+Nicholas Castellanos          4.0150.4250.94 0.3950.2951.09 1.145     Rhys Hoskins                  4.0950.3251.0050.35 0.2251.1951.07 
+Kris Bryant                   3.9  0.31 0.8550.42 0.36 1.0751.045     J.T. Realmuto                 3.7950.33 0.9250.3850.3751.03 1.03 
+Anthony Rizzo                 3.8850.4151.0250.37 0.2050.96 1.01      Jean Segura                   3.9050.36 0.94 0.38 0.2351.05 1.135
+Javier Baez                   3.78 0.3250.9150.41 0.2151.0051.11      Scott Kingery                 3.7750.3650.88 0.45 0.2650.92 1.02 
+Jonathan Lucroy               3.55 0.2950.82 0.34 0.3250.92 0.915     Corey Dickerson               3.66 0.2850.9350.36 0.26 1.02 0.9  
+Albert Almora Jr.             3.54 0.36 0.8650.2750.3150.9850.94      Cesar Hernandez               3.51 0.27 0.9050.2850.24 0.9351.055
+Ian Happ                      3.4850.3550.9150.3950.22 1.02 0.935     Roman Quinn                   3.4650.2  0.77 0.27 0.24 0.87 1.07 
+Jose Quintana                 2.23 0.19 0.56 0.2350.1050.6050.53      Jason Vargas                  1.6150.1650.3850.16 0.09 0.55 0.46 
+Generic                       1.1450.0950.22 0.1350.0450.37 0.34      Generic                       1.76 0.17 0.48 0.1650.11 0.48 0.46 
+The simulations took 1151.7457480430603 seconds for the 200 simulations
+The Cubs beat the Phillies 55.0% of the games by an average score of 5.315265496481861 to 4.966203284772605
+The Cubs have a 52.57507931801477% chance of winning, a 41.56726878717173% chance of covering -1.5, and a 63.388532169991585% chance of covering +1.5
+
+Shin-Soo Choo                 4.3050.3750.8850.41 0.37 1.4150.995     Bo Bichette                   4.07 0.33 1.16 0.4350.17 1.01 0.805
+Danny Santana                 4.0750.36 1.0050.3750.51 1.2751.1       Cavan Biggio                  3.9350.2950.96 0.32 0.18 0.9451.06 
+Elvis Andrus                  3.92 0.45 0.88 0.4350.4351.1451.22      Vladimir Guerrero Jr.         3.84 0.35 0.89 0.3850.17 0.95 1.025
+Willie Calhoun                3.9150.37 0.9650.4150.34 1.1051.08      Justin Smoak                  3.7450.39 0.91 0.4450.16 0.98 0.93 
+Hunter Pence                  3.73 0.35 0.8250.3350.37 1.1551.075     Randal Grichuk                3.6850.31 0.8950.4450.17 0.99 0.93 
+Rougned Odor                  3.7750.39 0.91 0.43 0.3151.07 1.11      Teoscar Hernandez             3.6550.2650.89 0.36 0.1250.87 0.895
+Logan Forsythe                3.61 0.4  0.85 0.4450.3851.03 1.005     Billy McKinney                3.52 0.29 0.85 0.33 0.1450.96 0.795
+Delino DeShields              3.5950.2950.82 0.31 0.3251.1851.02      Brandon Drury                 3.4250.3250.8350.35 0.1850.8550.79 
+Jeff Mathis                   3.4850.32 0.8450.36 0.36 0.9550.93      Reese McGuire                 3.2950.3  0.8250.3650.1450.83 0.775
+Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0       Generic                       0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+The simulations took 480.737535238266 seconds for the 200 simulations
+The Rangers beat the Blue Jays 53.0% of the games by an average score of 5.6087950836010085 to 5.465996906083586
+The Rangers have a 51.02801688247337% chance of winning, a 40.32513772477155% chance of covering -1.5, and a 61.65693771872866% chance of covering +1.5
+
+Joc Pederson                  4.3650.51 1.4050.42 0.16 1.07 0.95      Jon Berti                     4.5550.27 1.16 0.2950.1851.26 0.9  
+Max Muncy                     4.22 0.53 1.45 0.6550.1351.02 1.105     Isan Diaz                     4.4750.46 1.3450.3950.1750.9050.97 
+Justin Turner                 3.9050.55 1.22 0.5950.18 1.04 1.1       Brian Anderson                4.2150.42 1.3050.4150.27 0.86 1.06 
+Cody Bellinger                4.0650.52 1.4  0.5350.1651.0151.115     Garrett Cooper                4.1850.4  1.3250.47 0.1450.9651.08 
+A.J. Pollock                  3.8250.48 1.18 0.4750.1851.07 1.075     Starlin Castro                4.09 0.4051.17 0.45 0.19 0.91 1.035
+Corey Seager                  3.7450.5  1.2850.53 0.1851.03 0.955     Harold Ramirez                4.0550.36 1.24 0.4050.19 0.8550.925
+Will Smith                    3.7750.4851.26 0.53 0.11 0.94 1.055     Jorge Alfaro                  3.94 0.3951.3450.5450.15 0.85 0.95 
+Matt Beaty                    3.73 0.51 1.16 0.6350.16 1.0550.995     Lewis Brinson                 3.8550.3151.0950.3050.16 0.7851.145
+Dustin May                    2.1450.2450.81 0.31 0.05 0.6050.5       Jordan Yamamoto               1.83 0.1850.63 0.21 0.05 0.3550.475
+Generic                       1.4150.1250.38 0.1450.0950.45 0.31      Generic                       1.8950.1050.4050.11 0.0750.5150.485
+The simulations took 293.77054834365845 seconds for the 200 simulations
+The Dodgers beat the Marlins 62.0% of the games by an average score of 7.71903481802515 to 5.711927100696926
+The Dodgers have a 63.01468189567826% chance of winning, a 53.344911514812054% chance of covering -1.5, and a 71.92252362602942% chance of covering +1.5
+
