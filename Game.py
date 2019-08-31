@@ -43,8 +43,10 @@ class Game:
 
     def simulate_game(self):
         if self.pitch_limits[0] == -1:
+            print("Could Not Generate Pitching Limits")
             return None, None, None
         if len(self.curr_bootstraps[0]['Generic']) == 0 or len(self.curr_bootstraps[1]['Generic']) == 0:
+            print("Could Not Generate A Generic Bootstrap")
             return None, None, None
         while self.inning < 18 or self.score[0] == self.score[1] or \
                 (self.inning >= 18 and self.score[0] != self.score[1] and self.inning % 2 == 1):
