@@ -236,6 +236,7 @@ def get_most_similar(player, identifier):
         file = open(os.path.join(cwd, "Similarity Scores", "2019 Pitcher Similarity Scores.csv"))
     lines = file.readlines()
     names = lines[0].split(",")[1:]
+    names = list(map(lambda x: x.strip(), names))
     names_np = np.array(names)
     if player in names:
         ind = names.index(player)
