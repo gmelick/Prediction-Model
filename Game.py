@@ -194,7 +194,7 @@ class Game:
                 return aggregate
             else:
                 aggregate = self.create_baserunner_criteria(self.create_run_diff_criteria(current_bootstrap))
-                aggregate = np.concatenate((aggregate, self.create_count_criteria(self.create_count_criteria(current_bootstrap))))
+                aggregate = np.concatenate((aggregate, self.create_count_criteria(self.create_run_diff_criteria(current_bootstrap))))
                 if aggregate.shape[0] > 5:
                     return aggregate
                 else:
