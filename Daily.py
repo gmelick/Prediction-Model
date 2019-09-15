@@ -10,7 +10,7 @@ import time
 cur_date = datetime.now()
 while True:
     cmp_date = datetime.now()
-    if cur_date.day == cmp_date.day and cmp_date.hour > 7:
+    if cur_date.day == cmp_date.day and cmp_date.hour > 6:
         Import_Batter_Stats.main()
         Batter_Similarities.main()
         PitchFX.main()
