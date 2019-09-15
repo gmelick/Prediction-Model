@@ -83,6 +83,8 @@ def main():
                     doubleheader_tracking[away_team + " @ " + home_team] = away_starter + home_starter
                 elif doubleheader_tracking[away_team + " @ " + home_team] != away_starter + home_starter:
                     doubleheader_tracking[away_team + " @ " + home_team] = 1
+                else:
+                    continue
             away_lineup = []
             home_lineup = []
             for a, player in enumerate(game.find_all("a", {"class": "starting-lineups__player--link"})):
