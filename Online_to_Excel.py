@@ -1,174 +1,154 @@
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
-from datetime import date, timedelta
-import PitchFX
+from datetime import timedelta
+from PitchFX import find_games, refresh_season_stats
 import os
 
 
-def create_roster():
-    cur_date = date.today() - timedelta(1)
-    base_url = "https://www.mlb.com/starting-lineups/"
-    file = open(os.path.join(cwd, "Master Roster.csv"))
-    roster = {}
-    for line in file.readlines():
-        roster[line.split(",")[0].strip()] = line.split(",")[1].strip()
-    file.close()
+def process_day(day):
+    yesterday_games = find_games(day)
+    __create_roster(day)
+    if day.month >= 5:
+        __bullpens_to_file(day.year)
+    else:
+        __bullpens_to_file(day.year - 1)
+    __pitches_to_file(yesterday_games, False)
 
-    url = base_url + str(cur_date)
+
+def refresh_season(day):
+    games = refresh_season_stats(day)
+    __pitches_to_file(games, True)
+
+
+def __create_roster(day):
+    cur_date = day - timedelta(1)
+    roster = {}
+    # Load pre-existing players into roster
+    with open(os.path.join(cwd, "Master Roster.csv")) as file:
+        player_list = [line.split(",")[0].strip() for line in file.readlines()]
+
+    # Get new players from previous day's games and load them into roster
+    url = f"https://www.mlb.com/starting-lineups/{cur_date}"
     soup = BeautifulSoup(requests.get(url).content, 'html.parser')
-    lineup_class = "starting-lineups__teams starting-lineups__teams--sm starting-lineups__teams--xl"
-    games = soup.find_all("div", {"class": lineup_class})
+    games = soup.find_all("div",
+                          {"class": "starting-lineups__teams starting-lineups__teams--sm starting-lineups__teams--xl"})
     for i, game in enumerate(games):
-        print("Roster Game " + str(i + 1) + " of " + str(len(games)))
         for player in game.find_all("a", {"class": "starting-lineups__player--link"}):
-            if player.text not in roster:
+            if player.text not in player_list:
                 href = player["href"]
                 player_number = href[href.rfind("-") + 1:]
                 roster[player.text] = player_number
 
-    file = open(os.path.join(cwd, "Master Roster.csv"), 'w+')
-    for player in roster:
-        file.write(player + "," + roster[player] + "\n")
+    # Write the roster to file
+    with open(os.path.join(cwd, "Master Roster.csv"), 'a+') as file:
+        for player in roster:
+            file.write(f"{player},{roster[player]}\n")
     return roster
 
 
-def bullpens_to_file():
+def __bullpens_to_file(year):
     for i, team in enumerate(__teams):
-        print(team + ": " + str(i + 1) + " of 30")
-        composite, bullpen = get_bullpen(team)
-        file = open(os.path.join(cwd, "Bullpens", "2019 " + team + " Bullpen.csv"), 'w+')
-        for pitcher in bullpen:
-            if pitcher in name_corrections:
-                file.write(name_corrections[pitcher.strip()] + "\n")
-            else:
-                file.write(pitcher.strip() + "\n")
-            for row in bullpen[pitcher]:
-                for i, column in enumerate(row):
-                    if i != len(row) - 1:
-                        file.write(str(column) + ",")
-                    else:
-                        file.write(str(column) + "\n")
-        file.write("Composite\n")
-        for row in composite:
-            for i, column in enumerate(row):
-                if i != len(row) - 1:
-                    file.write(str(column) + ",")
-                else:
-                    file.write(str(column) + "\n")
-        file.close()
+        composite, bullpen = __get_bullpen(team, year)
+        with open(os.path.join(cwd, "Bullpens", f"{year} {team} Bullpen.csv"), 'w+') as file:
+            for pitcher in bullpen:
+                pitcher_write = name_corrections[pitcher] if pitcher in name_corrections else pitcher
+                file.write(f"{pitcher_write}\n")
+                __write_matrix_to_file(bullpen[pitcher], file)
+            file.write("Composite\n")
+            __write_matrix_to_file(composite, file)
 
 
-def get_bullpen(team_name):
+def __write_matrix_to_file(matrix, file):
+    for row in matrix:
+        file_write_row = ",".join([str(entry) for entry in row])
+        file.write(f"{file_write_row}\n")
+
+
+def __get_bullpen(team_name, year):
     __pitchers = {}
     __comp_matrix = np.zeros((7, 11))
-    base_url = "https://www.baseball-reference.com"
-    url = base_url + "/teams/" + __teams[team_name] + "/2019-pitching.shtml"
+
+    url = f"https://www.baseball-reference.com/teams/{__teams[team_name]}/{year}-pitching.shtml"
     soup = BeautifulSoup(requests.get(url).content, 'html.parser')
-    table = soup.find("table", {"id": "team_pitching"})
-    body = table.find("tbody")
-    relievers = False
-    for i, row in enumerate(body.find_all("tr")):
-        position = row.find("td", {"data-stat": "pos"})
-        innings = row.find("td", {"data-stat": "IP"})
-        if position is not None:
-            if position.text == "CL":
-                relievers = True
-            if relievers:
-                if float(innings.text) < 15:
-                    break
-                link = row.find("a")["href"]
-                __pitchers[row.find("a").text] = __compute_pitcher_matrix(link, base_url, __comp_matrix, __pitchers)
+    rows = soup.find("table", {"id": "team_pitching"}).find("tbody").find_all("tr")
+    for row in rows:
+        __process_player(row, year, __pitchers, __comp_matrix)
     return __comp_matrix, __pitchers
 
 
-def __compute_pitcher_matrix(link, base_url, __composite_matrix, __pitchers):
-    pitcher_matrix = np.zeros((7, 11))
+def __process_player(row, year, __pitchers, __comp_matrix):
+    position = row.find("td", {"data-stat": "pos"})
+    if position is not None:
+        innings = float(row.find("td", {"data-stat": "IP"}).text.strip())
+        if position.text.strip() != "SP" and innings >= 15:
+            situations = __get_pitcher_situations(row, year)
+            name = row.find("a").text.strip()
+            __pitchers[name], __comp_matrix = __create_matrix(situations, __pitchers, __comp_matrix)
+
+
+def __get_pitcher_situations(row, year):
+    link = row.find("a")["href"]
     player_id = link[link.rfind("/") + 1: link.rfind(".")]
-    params = {"id": player_id, "t": "p", "year": 2019}
-    url = base_url + "/players/gl.fcgi"
-    soup = BeautifulSoup(requests.get(url, params).content, 'html.parser')
-    game_log = soup.find("table", {"id": "pitching_gamelogs"})
-    situations = game_log.find_all("td", {"data-stat": "pitcher_situation_in"})
-    for j, situation in enumerate(situations):
-        if j != len(situations) - 1 and "1b start" not in situation.text and "1t start" not in situation.text:
+    params = {"id": player_id, "t": "p", "year": year}
+    soup = BeautifulSoup(requests.get("https://www.baseball-reference.com/players/gl.fcgi", params).content,
+                         'html.parser')
+    return soup.find("table", {"id": "pitching_gamelogs"}).find("tbody").find_all("td",
+                                                                                  {"data-stat": "pitcher_situation_in"})
+
+
+def __create_matrix(situations, __pitchers, __comp_matrix):
+    pitcher_matrix = np.zeros((7, 11))
+    for situation in situations:
+        if "1b start" not in situation.text and "1t start" not in situation.text:
             inning = int(situation.text[:2])
-            score = situation.text[situation.text.rfind("out") + 4:]
-            pitcher_matrix = __fill_matrix(inning, score, pitcher_matrix, __composite_matrix, __pitchers)
-    return pitcher_matrix
+            if inning != 0:
+                score = situation.text[situation.text.rfind("out") + 4:]
+                pitcher_matrix, __comp_matrix = __fill_matrix(inning, score, pitcher_matrix, __comp_matrix)
+    return pitcher_matrix, __comp_matrix
 
 
-def __fill_matrix(inning, score, pitcher_matrix, __composite_matrix, __pitchers):
+def __fill_matrix(inning, score, pitcher_matrix, __comp_matrix):
     if inning <= 4:
-        pitcher_matrix = __fill_runs(0, score, pitcher_matrix, __composite_matrix, __pitchers)
+        pitcher_matrix, __comp_matrix = __fill_runs(0, score, pitcher_matrix, __comp_matrix)
     elif inning >= 10:
-        pitcher_matrix = __fill_runs(6, score, pitcher_matrix, __composite_matrix, __pitchers)
+        pitcher_matrix, __comp_matrix = __fill_runs(6, score, pitcher_matrix, __comp_matrix)
     else:
-        pitcher_matrix = __fill_runs(inning - 4, score, pitcher_matrix, __composite_matrix, __pitchers)
-    return pitcher_matrix
+        pitcher_matrix, __comp_matrix = __fill_runs(inning - 4, score, pitcher_matrix, __comp_matrix)
+    return pitcher_matrix, __comp_matrix
 
 
-def __fill_runs(index, score, pitcher_matrix, __composite_matrix, __pitchers):
+def __fill_runs(index, score, pitcher_matrix, __comp_matrix):
     if score == "tie":
-        pitcher_matrix[index][5] += 1
-        __composite_matrix[index][5] += 1
+        pitcher_matrix, __comp_matrix = __iter_indices(index, 5, pitcher_matrix, __comp_matrix)
     elif score[0] == "a":
         lead = int(score[1:])
-        if lead > 4:
-            pitcher_matrix[index][10] += 1
-            __composite_matrix[index][10] += 1
-        else:
-            pitcher_matrix[index][lead + 5] += 1
-            __composite_matrix[index][lead + 5] += 1
+        lead = 10 if lead > 4 else lead + 5
+        pitcher_matrix, __comp_matrix = __iter_indices(index, lead, pitcher_matrix, __comp_matrix)
     else:
         deficit = int(score[1:])
-        if deficit > 4:
-            pitcher_matrix[index][0] += 1
-            __composite_matrix[index][0] += 1
-        else:
-            pitcher_matrix[index][np.abs(deficit - 5)] += 1
-            __composite_matrix[index][np.abs(deficit - 5)] += 1
-    return pitcher_matrix
+        deficit = 0 if deficit > 4 else np.abs(deficit - 5)
+        pitcher_matrix, __comp_matrix = __iter_indices(index, deficit, pitcher_matrix, __comp_matrix)
+    return pitcher_matrix, __comp_matrix
 
 
-def pitches_to_file(yesterday_games):
-    file = open(os.path.join(cwd, "Pitcher Pitches.csv"))
-    pitches = {}
-    for line in file.readlines():
-        name = line.split(",")[0].strip()
-        pitches[name] = []
-        for pc in line.split(",")[1:]:
-            pitches[name].append(pc.strip())
-    file.close()
-
-    for i, game in enumerate(yesterday_games):
-        print("Pitches Game " + str(i + 1) + " of " + str(len(yesterday_games)))
-        box = requests.get("https://statsapi.mlb.com/api/v1/game/" + str(game) + "/boxscore").json()
-        for team_des in box["teams"]:
-            team = box["teams"][team_des]
-            for player_id in team["players"]:
-                player = team["players"][player_id]
-                if "numberOfPitches" in player["stats"]["pitching"]:
-                    if player["person"]["fullName"] in pitches:
-                        pitches[player["person"]["fullName"]].append(player["stats"]["pitching"]["numberOfPitches"])
-                    else:
-                        pitches[player["person"]["fullName"]] = [player["stats"]["pitching"]["numberOfPitches"]]
-
-    file = open(os.path.join(cwd, "Pitcher Pitches.csv"), 'w+')
-    for pitcher in pitches:
-        print(pitcher)
-        file.write(pitcher + ",")
-        for pitch_total in pitches[pitcher][:len(pitches[pitcher]) - 1]:
-            file.write(str(pitch_total) + ",")
-        file.write(str(pitches[pitcher][-1]) + "\n")
-    file.close()
+def __iter_indices(inning, lead, pitcher_matrix, __comp_matrix):
+    pitcher_matrix[inning][lead] += 1
+    __comp_matrix[inning][lead] += 1
+    return pitcher_matrix, __comp_matrix
 
 
-def pitches_to_file_alt(games):
-    pitches = {}
+def __pitches_to_file(games, complete_refresh):
+    if not complete_refresh:
+        with open(os.path.join(cwd, "Pitcher Pitches.csv")) as file:
+            pitches = {line.strip().split(",")[0].strip(): line.strip().split(",")[1:] for line in file.readlines()}
+    else:
+        pitches = {}
+
+    # Iterate through yesterday's box scores, and add the pitch counts from all the pitchers who pitched
     for i, game in enumerate(games):
-        print("Pitches Game " + str(i + 1) + " of " + str(len(games)))
-        box = requests.get("https://statsapi.mlb.com/api/v1/game/" + str(game) + "/boxscore").json()
+        game = game[1]
+        box = requests.get(f"https://statsapi.mlb.com/api/v1/game/{game}/boxscore").json()
         for team_des in box["teams"]:
             team = box["teams"][team_des]
             for player_id in team["players"]:
@@ -179,59 +159,45 @@ def pitches_to_file_alt(games):
                     else:
                         pitches[player["person"]["fullName"]] = [player["stats"]["pitching"]["numberOfPitches"]]
 
-    file = open(os.path.join(cwd, "Pitcher Pitches.csv"), 'w+')
-    for pitcher in pitches:
-        print(pitcher)
-        file.write(pitcher + ",")
-        for pitch_total in pitches[pitcher][:len(pitches[pitcher]) - 1]:
-            file.write(str(pitch_total) + ",")
-        file.write(str(pitches[pitcher][-1]) + "\n")
-    file.close()
+    with open(os.path.join(cwd, "Pitcher Pitches.csv"), 'w+') as file:
+        for pitcher in pitches:
+            file.write(f"{pitcher},")
+            file_pitches = ",".join([str(pitch) for pitch in pitches[pitcher]])
+            file.write(f"{file_pitches}\n")
 
 
-def main():
-    yesterday_games = PitchFX.find_games()
-    create_roster()
-    bullpens_to_file()
-    pitches_to_file(yesterday_games)
-
-
-def main_alt():
-    games = PitchFX.refresh_season_stats()
-    pitches_to_file_alt(games)
-
-
-__teams = {"Braves": "ATL",
-           "Marlins": "MIA",
-           "Mets": "NYM",
-           "Phillies": "PHI",
-           "Nationals": "WSN",
-           "Cubs": "CHC",
-           "Reds": "CIN",
-           "Brewers": "MIL",
-           "Pirates": "PIT",
-           "Cardinals": "STL",
-           "D-backs": "ARI",
-           "Rockies": "COL",
-           "Dodgers": "LAD",
-           "Padres": "SDP",
-           "Giants": "SFG",
-           "Orioles": "BAL",
-           "Red Sox": "BOS",
-           "Yankees": "NYY",
-           "Rays": "TBR",
-           "Blue Jays": "TOR",
-           "White Sox": "CHW",
-           "Indians": "CLE",
-           "Tigers": "DET",
-           "Royals": "KCR",
-           "Twins": "MIN",
-           "Astros": "HOU",
-           "Angels": "LAA",
-           "Athletics": "OAK",
-           "Mariners": "SEA",
-           "Rangers": "TEX"
-           }
+__teams = {
+    "Braves": "ATL",
+    "Marlins": "MIA",
+    "Mets": "NYM",
+    "Phillies": "PHI",
+    "Nationals": "WSN",
+    "Cubs": "CHC",
+    "Reds": "CIN",
+    "Brewers": "MIL",
+    "Pirates": "PIT",
+    "Cardinals": "STL",
+    "D-backs": "ARI",
+    "Rockies": "COL",
+    "Dodgers": "LAD",
+    "Padres": "SDP",
+    "Giants": "SFG",
+    "Orioles": "BAL",
+    "Red Sox": "BOS",
+    "Yankees": "NYY",
+    "Rays": "TBR",
+    "Blue Jays": "TOR",
+    "White Sox": "CHW",
+    "Indians": "CLE",
+    "Tigers": "DET",
+    "Royals": "KCR",
+    "Twins": "MIN",
+    "Astros": "HOU",
+    "Angels": "LAA",
+    "Athletics": "OAK",
+    "Mariners": "SEA",
+    "Rangers": "TEX"
+}
 name_corrections = {
     "J.D. Hammer": "JD Hammer",
     "Josh Smith": "Josh A. Smith"
