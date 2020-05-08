@@ -1,0 +1,14 @@
+Trent Grisham                 4.0440.2560.7920.2520.2481.54 0.7       Trea Turner                   4.0560.2880.8  0.2920.2521.32 0.768
+Yasmani Grandal               3.9160.3520.8240.3680.2721.4120.848     Adam Eaton                    3.8720.3040.9  0.2840.2681.28 0.792
+Mike Moustakas                3.74 0.2760.7  0.3160.2641.36 0.856     Anthony Rendon                3.7  0.3120.7840.3280.3121.2280.964
+Keston Hiura                  3.74 0.2520.7440.2920.2241.42 0.86      Juan Soto                     3.7040.2160.8840.3  0.2241.12 0.864
+Ryan Braun                    3.6640.24 0.7680.2640.1841.3440.764     Howie Kendrick                3.6880.26 0.7920.2520.2281.2080.948
+Eric Thames                   3.4840.2320.6040.24 0.2  1.38 0.884     Asdrubal Cabrera              3.5  0.2520.68 0.2440.2281.28 0.824
+Lorenzo Cain                  3.4880.2640.68 0.2680.1681.3080.708     Kurt Suzuki                   3.44 0.2280.7160.2160.2041.1  0.76 
+Orlando Arcia                 3.4080.2880.7320.34 0.1761.2440.72      Victor Robles                 3.3720.2840.72 0.2720.22 1.0840.864
+Brandon Woodruff              2.1360.1440.3640.1840.16 0.8880.392     Max Scherzer                  2.2080.1640.4640.1640.0960.7440.468
+Generic                       1.04 0.06 0.1920.06 0.0640.3280.292     Generic                       1.0  0.0680.24 0.0520.0680.3320.236
+The simulations took 2125.1394987106323 seconds for the 250 simulations
+The Brewers beat the Nationals 54.0% of the games by an average score of 4.131627269504109 to 3.922189942478555
+The Brewers have a 51.73784247516845% chance of winning, a 39.415283922486864% chance of covering -1.5, and a 63.89529607997031% chance of covering +1.5
+
