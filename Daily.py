@@ -26,7 +26,7 @@ while True:
         simulate_day(cur_date)
         cur_date += timedelta(1)
     elif not live:
-        start_date = date(2019, 9, 6)
+        start_date = date(2019, 3, 28)
         end_date = date(2020, 1, 1)
         while start_date < end_date:
             print("Importing Batter Statistics")
