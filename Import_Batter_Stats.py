@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import os
-from datetime import date
+from datetime import date, timedelta
+import time
 
 
 def get_batter_stats(day):
@@ -27,7 +28,7 @@ def get_batter_stats(day):
     # Gets the desired player data from the last three years and adds it to the statistics dictionary
     starting_params["season1"] = day.year - 2
     starting_params["startdate"] = str(date(day.year - 2, 3, 1))
-    starting_params["enddate"] = str(day)
+    starting_params["enddate"] = str(day - timedelta(1))
     for stat_type in fields_by_type:
         starting_params["type"] = stat_type
         __process_pages(starting_params, stats, file, stat_type)
@@ -54,6 +55,7 @@ def __open_file(file_name):
 def __process_pages(params, stats, file, stat_type=None):
     pages = __get_total_pages(params)
     for page in range(1, pages + 1):
+        print(f"Processing Batter {print_types[stat_type]}: Page {page} of {pages}")
         params["page"] = f"{page}_50"
         table_body = __get_table_body(params)
         __process_table(table_body, stats, file, stat_type)
@@ -61,16 +63,19 @@ def __process_pages(params, stats, file, stat_type=None):
 
 def __get_total_pages(params):
     soup = BeautifulSoup(requests.get(url, params).content, 'html.parser')
+    time.sleep(1)
     return int(soup.find("div", {"class": "rgWrap rgInfoPart"}).find_all("strong")[1].text)
 
 
 def __get_table_body(params):
     soup = BeautifulSoup(requests.get(url, params).content, 'html.parser')
+    time.sleep(1)
     return soup.find("table", {"class": "rgMasterTable"}).find("tbody")
 
 
 def __process_table(table, stats, file, stat_type):
     for row in table.find_all("tr"):
+        # Waiting one second in between calls because of the FanGraphs Robot check
         data = row.find_all("td")
         name = data[1].text
         if stat_type is None:
@@ -85,6 +90,7 @@ def __get_handedness(row, name, stats, file):
     handedness_extension = row.find("a")["href"]
     handedness_url = "https://www.fangraphs.com/" + handedness_extension
     soup = BeautifulSoup(requests.get(handedness_url).content, 'html.parser')
+    time.sleep(1)
     bats_throws = soup.find_all("div", {"class": "player-info-box-item"})[1].text
     start = bats_throws.find(":") + 2
     stats[name] = [bats_throws[start:start + 1]]
@@ -116,9 +122,18 @@ name_corrections = {
     "Steve Wilkerson": "Stevie Wilkerson",
     "J.T. Riddle": "JT Riddle",
     "Dwight Smith Jr.": "Dwight Smith Jr",
-    "Richie Martin Jr.": "Richie Martin"
+    "Richie Martin Jr.": "Richie Martin",
+    "Nicholas Castellanos": "Nick Castellanos",
+    "Shed Long": "Shed Long Jr.",
+    "Nathaniel Lowe": "Nate Lowe",
+    "D.J. Stewart": "DJ Stewart"
 }
-
+print_types = {
+    None: "Handedness",
+    1: "Advanced",
+    2: "Batted Ball",
+    5: "Plate Discipline"
+}
 # The keys (1, 2, 5) are the different types on the FanGraphs leaderboard page:
 #       1 - Advanced
 #       2 - Batted Ball

@@ -5,7 +5,7 @@ import warnings
 
 
 class Game:
-    def __init__(self, game_date, teams, starters, lineups, pitches_matrix, bullpens, bootstraps, roster):
+    def __init__(self, game_date, teams, starters, lineups, pitches_matrix, bullpens, bootstraps):
         self.game_date = game_date
         self.teams = teams
         self.current_pitcher = copy.deepcopy(starters)
@@ -18,12 +18,15 @@ class Game:
         self.outs = 0
         self.strikes = 0
         self.balls = 0
+        self.foul_count = 0
         self.runners = ["", "", ""]
         self.bootstraps = bootstraps
-        self.curr_bootstraps = [self.bootstraps[0][starters[0]], self.bootstraps[1][starters[1]]]
+        if starters[0] in self.bootstraps[0] and starters[1] in self.bootstraps[1]:
+            self.curr_bootstraps = [self.bootstraps[0][starters[0]], self.bootstraps[1][starters[1]]]
+        else:
+            self.curr_bootstraps = [{}, {}]
         self.linescore = []
         self.boxscore = [{batter: [0] * 7 for batter in lineup} for lineup in lineups]
-        self.roster = roster
         self.pitches_matrix = pitches_matrix
         self.pitch_limits = [-1, -1]
         if starters[0] in self.pitches_matrix:
@@ -40,8 +43,8 @@ class Game:
         if self.pitch_limits[0] == -1 or self.pitch_limits[1] == -1:
             warnings.warn("Could Not Generate Pitching Limits", RuntimeWarning)
             return None, None, None
-        if len(self.curr_bootstraps[0]["Generic"]) == 0 or len(self.curr_bootstraps[1]["Generic"]) == 0:
-            warnings.warn("Could Not Generate A Generic Bootstrap", RuntimeWarning)
+        if not bool(self.curr_bootstraps[0]) or not bool(self.curr_bootstraps[1]):
+            warnings.warn("Could Not Generate a Bootstrap for one of the starters", RuntimeWarning)
             return None, None, None
 
         # Simulate the next half inning if it is the first nine innings, or it is tied, or the visiting team has taken
@@ -88,6 +91,7 @@ class Game:
         self.batting_indices[curr_index] %= 9
         self.strikes = 0
         self.balls = 0
+        self.foul_count = 0
 
     def simulate_pitch(self, curr_index, curr_batter_bootstrap, batter):
         criteria_pitches = self.create_criteria(curr_batter_bootstrap)
@@ -97,8 +101,7 @@ class Game:
             pitch = curr_batter_bootstrap[np.random.randint(len(curr_batter_bootstrap))]
         self.pitch_counts[curr_index] += 1
 
-        # If this pitch was not the last pitch of the at-bat, we just iterate strikes or balls by one
-        if pitch[9] != pitch[10]:
+        if pitch[16] not in in_play:
             self.mid_at_bat_pitch(pitch, batter, curr_index)
         else:
             self.outs += int(pitch[51])
@@ -106,18 +109,22 @@ class Game:
             result = pitch[8]
             self.score[curr_index] += runs
             self.__fill_in_boxscore(curr_index, batter, result, runs)
-            self.__advance_runners(pitch, batter)
+            if int(pitch[51]) + int(pitch[15]) < 3:
+                self.__advance_runners(pitch, batter)
             return -1
 
     def mid_at_bat_pitch(self, pitch, batter, curr_index):
-        if pitch[16] == 'S':
-            self.strikes += 1
-            if self.strikes == 3:
-                self.outs += 1
-                self.boxscore[curr_index][batter][0] += 1
-                self.boxscore[curr_index][batter][5] += 1
-                self.__find_left_on_base(curr_index, batter)
-        elif pitch[16] == 'B':
+        if pitch[16] in strike_codes:
+            if self.strikes < 2 or pitch[16] != "F" or self.foul_count >= 3:
+                self.strikes += 1
+                if self.strikes == 3:
+                    self.outs += 1
+                    self.boxscore[curr_index][batter][0] += 1
+                    self.boxscore[curr_index][batter][5] += 1
+                    self.__find_left_on_base(curr_index, batter)
+            elif pitch[16] == "F" and self.strikes == 2:
+                self.foul_count += 1
+        elif pitch[16] in ball_codes:
             self.balls += 1
             if self.balls == 4:
                 self.walk(batter, curr_index)
@@ -135,6 +142,7 @@ class Game:
             self.runners[0] = batter
         else:
             self.score[curr_index] += 1
+            self.linescore[-1] += 1
             self.boxscore[curr_index][self.runners[2]][1] += 1
             self.boxscore[curr_index][batter][3] += 1
             self.runners[2] = self.runners[1]
@@ -244,31 +252,72 @@ class Game:
                 self.boxscore[curr_index][batter][6] += 1
 
     def __advance_runners(self, pitch, batter):
-        if pitch[47] == "":
-            self.runners[0] = ""
-        elif pitch[47] != pitch[44]:
-            self.runners[0] = batter
+        res = pitch[8]
+        outs_on_play = int(pitch[51])
+        runs_on_play = int(pitch[50])
+        runners_on_before = sum(np.array(self.runners) != "")
+        if self.find_if_baserunners_match(pitch[44:47]):
+            for i in range(49, 46, -1):
+                if pitch[i] == "":
+                    self.runners[i - 47] = ""
+                else:
+                    for j in range(44, 47):
+                        if pitch[i] == pitch[j]:
+                            self.runners[i - 47] = self.runners[j - 44]
+                if pitch[i] == pitch[5]:
+                    self.runners[i - 47] = batter
+        elif res in hits:
+            bases = 1 if res == "Single" else 2 if res == "Double" else 3 if res == "Triple" else \
+                4 if res == "Home Run" else 0
+            if 0 < bases:
+                for i in range(3):
+                    runner = self.runners[i]
+                    self.runners[i] = ""
+                    if i + bases <= 2:
+                        self.runners[i + bases] = runner
+                if bases < 4:
+                    self.runners[bases - 1] = batter
+        else:
+            bases = 0
+            batter_reaches = False
+            for i in range(47, 50):
+                if pitch[i] == pitch[5]:
+                    batter_reaches = True
+                    bases = i - 46
+                    break
+            if batter_reaches:
+                for i in range(3):
+                    runner = self.runners[i]
+                    self.runners[i] = ""
+                    if runner == "" and i >= bases - 1:
+                        break
+                    elif i + bases <= 2:
+                        self.runners[i + bases] = runner
+                self.runners[bases - 1] = batter
+        runners_on_after = sum(np.array(self.runners) != "")
+        runs_by_runners = runners_on_before + 1 - runners_on_after - outs_on_play - runs_on_play
+        if runs_by_runners != 0:
+            if runs_by_runners < 0:
+                if np.abs(runs_by_runners) > runs_on_play:
+                    adjusted_outs = np.abs(runs_by_runners) - runs_on_play
+                    self.score[self.inning % 2] += adjusted_outs
+                    self.linescore[-1] += adjusted_outs
+                    self.outs -= adjusted_outs
+            self.score[self.inning % 2] += runs_by_runners
+            self.linescore[-1] += runs_by_runners
 
-        if pitch[48] == "":
-            self.runners[1] = ""
-        elif pitch[48] != pitch[45]:
-            if pitch[48] == pitch[44]:
-                self.runners[1] = self.runners[0]
-            else:
-                self.runners[1] = batter
-
-        if pitch[49] == "":
-            self.runners[2] = ""
-        elif pitch[49] != pitch[46]:
-            if pitch[49] == pitch[45]:
-                self.runners[2] = self.runners[1]
-            elif pitch[49] == pitch[44]:
-                self.runners[2] = self.runners[0]
-            else:
-                self.runners[2] = batter
+    def find_if_baserunners_match(self, baserunners):
+        baserunner_match = True
+        for i in range(3):
+            if not ((baserunners[i] != "" and self.runners[i] != "") or (baserunners[i] == self.runners[i])):
+                baserunner_match = False
+        return baserunner_match
 
 
 no_ab = ["Caught Stealing", "Hit By Pitch", "Intent Walk", "Sac Bunt", "Sac Fly", "Walk"]
 hits = ["Single", "Double", "Triple", "Home Run"]
 no_rbi = ["Field Error", "Grounded Into DP"]
 walk = ["Walk", "Intent Walk"]
+ball_codes = ["*B", "B"]
+strike_codes = ["C", "F", "L", "S", "T", "W"]
+in_play = ["D", "E", "X", "H"]

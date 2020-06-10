@@ -5,17 +5,28 @@ import os
 
 def load_pitch_fx_day_data(day):
     games = find_games(day)
+    pfx_ids = __get_pitchfx_ids()
+    print(f"Fetching PitchFX data from {len(games)} games")
     for i, game in enumerate(games):
-        __fill_data(game)
+        print(f"Fetching PitchFX data from game {i + 1} of {len(games)}")
+        __fill_data(game, pfx_ids)
 
 
 def refresh_pitch_fx_data(day):
-    for file in os.listdir(os.path.join(os.getcwd(), "PitchFX")):
-        if file.endswith(str(day.year) + ".csv"):
-            os.remove(os.path.join(os.getcwd(), "PitchFX", file))
     games = refresh_season_stats(day)
+    for file in os.listdir(os.path.join(os.getcwd(), "PitchFX")):
+        os.remove(os.path.join(os.getcwd(), "PitchFX", file))
     for i, game in enumerate(games):
-        __fill_data(game)
+        print(f"Fetching PitchFX data from game {i + 1} of {len(games)}")
+        __fill_data(game, [])
+
+
+def __get_pitchfx_ids():
+    pitch_list = []
+    for file in os.listdir(os.path.join(os.getcwd(), "PitchFX")):
+        with open(os.path.join(os.getcwd(), "PitchFX", file)) as pitch_file:
+            pitch_list += [line.split(",")[11] for line in pitch_file.readlines()[1:]]
+    return pitch_list
 
 
 def refresh_season_stats(day):
@@ -53,14 +64,14 @@ def find_games(day):
     }
     schedule = requests.get(schedule_url, params).json()["dates"]
     game_pks = []
-    for day in schedule:
-        for game in day["games"]:
+    for game_day in schedule:
+        for game in game_day["games"]:
             if game["gameType"] == "R" and game["status"]["codedGameState"] == "F":
-                game_pks.append((day, game["gamePk"]))
+                game_pks.append((day - timedelta(1), game["gamePk"]))
     return game_pks
 
 
-def __fill_data(game):
+def __fill_data(game, pfx_ids):
     game_date, game_key = game
     url = f"https://statsapi.mlb.com/api/v1/game/{game_key}/playByPlay"
     game_data = __connect(url)
@@ -78,7 +89,7 @@ def __fill_data(game):
             inning = new_inning
             half = new_half
 
-        new_baserunners, outs_on_play, runs = __get_new_baserunners(play["runners"])
+        new_baserunners, outs_on_play, runs = __get_new_baserunners(play)
         run_difference = __compute_run_difference(play["result"], half, runs)
         current_index = int(half == "bottom")
         current_pitcher, file = __process_pitcher_file(play["matchup"]["pitcher"], current_pitchers, current_files,
@@ -97,6 +108,8 @@ def __fill_data(game):
                 coordinates = data["coordinates"]
                 if "startSpeed" in data and "pX" in coordinates:
                     pfx_id = pitch["pfxId"]
+                    if pfx_id in pfx_ids:
+                        continue
                     play_id = pitch["playId"]
                     code = pitch["details"]["call"]["code"]
                     strikes = pitch["count"]["strikes"]
@@ -108,11 +121,12 @@ def __fill_data(game):
                     pdes = pitch["details"]["description"].replace(",", "-")
                     pitch_name = pitch["details"].get("type", {}).get("code", "U")
 
-                    data_stats_file = ",".join([data.get(key, "") for key in data_keys])
-                    coordinates_stats_file = ",".join([coordinates[key] for key in coordinates_keys])
+                    data_stats_file = ",".join([str(data.get(key, "")) for key in data_keys])
+                    coordinates_stats_file = ",".join([str(coordinates[key]) for key in coordinates_keys])
                     breaks = data["breaks"]
-                    break_stats_file = ",".join([breaks.get(key, "") for key in break_keys])
-                    file_baserunners, file_new_baserunners = ",".join(baserunners), ",".join(new_baserunners)
+                    break_stats_file = ",".join([str(breaks.get(key, "")) for key in break_keys])
+                    file_baserunners = ",".join([str(baserunner) for baserunner in baserunners])
+                    file_new_baserunners = ",".join([str(new_baserunner) for new_baserunner in new_baserunners])
 
                     file.write(f"{game_date},{game_key},{inning},{current_pitcher},{p_throws},")
                     file.write(f"{current_batter},{stand},{ab_index},{des},{total_pitches},{ab_count},{pfx_id},")
@@ -134,20 +148,17 @@ def __connect(url):
             continue
 
 
-def __get_new_baserunners(runners):
-    new_baserunners = ["", "", ""]
+def __get_new_baserunners(play):
+    new_baserunners = [play["matchup"].get("postOnFirst", {}).get("id", ""),
+                       play["matchup"].get("postOnSecond", {}).get("id", ""),
+                       play["matchup"].get("postOnThird", {}).get("id", "")]
     outs_on_play = 0
     runs = 0
-    for runner in runners:
-        start = runner["movement"]["start"]
-        end = runner["movement"]["end"]
+    for runner in play["runners"]:
         if runner["movement"]["isOut"]:
             outs_on_play += 1
-        if end == "score":
+        if runner["movement"]["end"] == "score":
             runs += 1
-        if start != end and start != "4B":
-            if end != "score" and end is not None and end != "4B":
-                new_baserunners[int(end[0]) - 1] = runner["details"]["runner"]["id"]
     return new_baserunners, outs_on_play, runs
 
 
@@ -169,7 +180,7 @@ def __process_pitcher_file(pitcher, current_pitchers, current_files, current_ind
         current_files[current_index] = file
     else:
         file = current_files[current_index]
-    return file, current_pitcher
+    return current_pitcher, file
 
 
 def __check_new_pitcher(name, year):

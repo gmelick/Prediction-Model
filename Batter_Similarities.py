@@ -54,6 +54,7 @@ def __calculate_maximums_minimums(lines, hands, player_stats, stat_count):
 def __compute_similarity_matrix(player_stats, player_count, hands, stat_count, key_list):
     similarity_matrix = np.empty((player_count, player_count))
     for i, player in enumerate(player_stats):
+        print(f"Finding similarity scores for {player}: {i + 1} of {len(player_stats)}")
         similarity_matrix[i][i] = 0
         for j in range(i + 1, player_count):
             if hands[i] == hands[j] or hands[i] == "B" or hands[j] == "B":
@@ -72,7 +73,7 @@ def __compute_similarity_matrix(player_stats, player_count, hands, stat_count, k
 
 
 def __write_to_file(year, key_list, player_stats, similarity_matrix):
-    with open(os.path.join(cwd, f"{year} Batter Similarity Scores.csv"), "w+") as file:
+    with open(os.path.join(cwd, "Similarity Scores", f"{year} Batter Similarity Scores.csv"), "w+") as file:
         for hitter in key_list:
             file.write(f",{hitter}")
         file.write("\n")

@@ -3,16 +3,18 @@ from bs4 import BeautifulSoup
 import numpy as np
 from datetime import timedelta
 from PitchFX import find_games, refresh_season_stats
+from bullpen_from_api import create_bullpen
 import os
 
 
 def process_day(day):
+    create_bullpen(True, day)
     yesterday_games = find_games(day)
-    __create_roster(day)
-    if day.month >= 5:
-        __bullpens_to_file(day.year)
-    else:
-        __bullpens_to_file(day.year - 1)
+    # __create_roster(day)
+    # if day.month >= 5:
+    #     __bullpens_to_file(day.year)
+    # else:
+    #     __bullpens_to_file(day.year - 1)
     __pitches_to_file(yesterday_games, False)
 
 
@@ -29,7 +31,7 @@ def __create_roster(day):
         player_list = [line.split(",")[0].strip() for line in file.readlines()]
 
     # Get new players from previous day's games and load them into roster
-    url = f"https://www.mlb.com/starting-lineups/{cur_date}"
+    url = f"https://www.mlb.com/starting-lineups/{cur_date - timedelta(1)}"
     soup = BeautifulSoup(requests.get(url).content, 'html.parser')
     games = soup.find_all("div",
                           {"class": "starting-lineups__teams starting-lineups__teams--sm starting-lineups__teams--xl"})
@@ -49,6 +51,7 @@ def __create_roster(day):
 
 def __bullpens_to_file(year):
     for i, team in enumerate(__teams):
+        print(f"Fetching {team} Bullpen: {i + 1} of 30")
         composite, bullpen = __get_bullpen(team, year)
         with open(os.path.join(cwd, "Bullpens", f"{year} {team} Bullpen.csv"), 'w+') as file:
             for pitcher in bullpen:
@@ -141,14 +144,22 @@ def __iter_indices(inning, lead, pitcher_matrix, __comp_matrix):
 def __pitches_to_file(games, complete_refresh):
     if not complete_refresh:
         with open(os.path.join(cwd, "Pitcher Pitches.csv")) as file:
-            pitches = {line.strip().split(",")[0].strip(): line.strip().split(",")[1:] for line in file.readlines()}
+            lines = file.readlines()
+            games_list = [int(game_key) for game_key in lines[0].split(",")]
+            pitches = {line.strip().split(",")[0].strip(): line.strip().split(",")[1:] for line in lines[1:]}
     else:
+        games_list = []
         pitches = {}
 
     # Iterate through yesterday's box scores, and add the pitch counts from all the pitchers who pitched
+    print(f"Getting Pitch Counts from {len(games)} games")
     for i, game in enumerate(games):
-        game = game[1]
-        box = requests.get(f"https://statsapi.mlb.com/api/v1/game/{game}/boxscore").json()
+        print(f"Game {i + 1} of {len(games)}")
+        game_key = game[1]
+        if game_key in games_list:
+            continue
+        games_list.append(game_key)
+        box = requests.get(f"https://statsapi.mlb.com/api/v1/game/{game_key}/boxscore").json()
         for team_des in box["teams"]:
             team = box["teams"][team_des]
             for player_id in team["players"]:
@@ -160,6 +171,8 @@ def __pitches_to_file(games, complete_refresh):
                         pitches[player["person"]["fullName"]] = [player["stats"]["pitching"]["numberOfPitches"]]
 
     with open(os.path.join(cwd, "Pitcher Pitches.csv"), 'w+') as file:
+        file.write(",".join([str(game) for game in games_list]))
+        file.write("\n")
         for pitcher in pitches:
             file.write(f"{pitcher},")
             file_pitches = ",".join([str(pitch) for pitch in pitches[pitcher]])
@@ -200,6 +213,7 @@ __teams = {
 }
 name_corrections = {
     "J.D. Hammer": "JD Hammer",
-    "Josh Smith": "Josh A. Smith"
+    "Josh Smith": "Josh A. Smith",
+    "Vidal Nuno III": "Vidal Nuno"
 }
 cwd = os.getcwd()
