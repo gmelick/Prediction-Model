@@ -527,4 +527,3 @@ teams_dict = {
     "Reds": "CIN"
 }
 game_sims = 100
-simulate_day(date(2019, 4, 1))
